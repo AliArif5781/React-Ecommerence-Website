@@ -1,15 +1,16 @@
-import { useEffect } from "react";
 import Skeleton from "../components/Skeleton";
 import { Product, useGetWomenProductQuery } from "../features/ApiSlice";
 import Error from "./Error";
 import { Link } from "react-router-dom";
 import { Heart } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../features/CartSlice";
+import { toast } from "react-toastify";
 
 const WomenProduct = () => {
+  const dispatch = useDispatch();
   const { data, isLoading, isError } =
     useGetWomenProductQuery("women's clothing");
-
-  useEffect(() => {}, [data]);
 
   if (isLoading) {
     return (
@@ -33,6 +34,13 @@ const WomenProduct = () => {
     );
   }
 
+  const AddToCart = (product: Product) => {
+    dispatch(addToCart(product));
+    toast.success(`${product.title}`, {
+      position: "top-center",
+      autoClose: 2000,
+    });
+  };
   return (
     <>
       <div className="h-[100vh] pt-20 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 place-items-center text-gray-600 border-gray-200 border-opacity-60">
@@ -67,10 +75,13 @@ const WomenProduct = () => {
             </p>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="text-sm font-semibold text-center text-white bg-black p-2 rounded cursor-pointer">
+                <div
+                  className="text-sm font-semibold text-center text-white bg-black p-2 rounded cursor-pointer"
+                  onClick={() => AddToCart(curProd)}
+                >
                   Add to Cart
                 </div>
-                <Link to={"/account-section/wishlist"}>
+                <Link to={"/wishlist"}>
                   <Heart />
                 </Link>
               </div>

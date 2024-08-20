@@ -6,7 +6,7 @@ import { Loader } from "lucide-react";
 
 interface ProtectedRouteProps {
   // Element: React.FC;       //  Use React.ComponentType instead of React.FC to accommodate both function and class components.
-  Element: React.ComponentType;
+  Element: React.ComponentType<any>;
   isAuthPage?: boolean;
 }
 const ProtectedRoute = ({ Element, isAuthPage }: ProtectedRouteProps) => {

@@ -6,7 +6,7 @@ export interface Product {
   category: string;
   description: string;
   image: string;
-  title: string;
+  title?: string;
 }
 export const productApi = createApi({
   reducerPath: "ProductApi",

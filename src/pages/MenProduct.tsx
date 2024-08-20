@@ -4,13 +4,14 @@ import { Product, useGetSingleProductQuery } from "../features/ApiSlice";
 import Error from "./Error";
 import { Link } from "react-router-dom";
 import { Heart } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../features/CartSlice";
+import { toast } from "react-toastify";
 
-const WomenProduct: React.FC = React.memo(() => {
+const MenProduct: React.FC = React.memo(() => {
   const { data, isLoading, isError } =
     useGetSingleProductQuery("men's clothing");
-
-  // Run effect on mount to fetch data
-  useEffect(() => {}, [data]);
+  const dispatch = useDispatch();
 
   // If data is loading, show skeletons
   if (isLoading) {
@@ -32,6 +33,15 @@ const WomenProduct: React.FC = React.memo(() => {
     );
   }
 
+  const handleAddToCart = (product: Product) => {
+    console.log("Adding to cart:", product);
+    dispatch(addToCart(product));
+    toast.success(`${product.title}`, {
+      position: "top-center",
+      autoClose: 2000,
+      style: { backgroundColor: "black", color: "white" },
+    });
+  };
   // If data is successfully fetched, render the product list
   return (
     <div className="h-[100vh] pt-20 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 place-items-center text-gray-600 border-gray-200 border-opacity-60">
@@ -64,10 +74,13 @@ const WomenProduct: React.FC = React.memo(() => {
           </p>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="text-sm font-semibold text-center text-white bg-black p-2 rounded cursor-pointer">
+              <div
+                className="text-sm font-semibold text-center text-white bg-black p-2 rounded cursor-pointer"
+                onClick={() => handleAddToCart(curProd)} // Call the function on click
+              >
                 Add to Cart
               </div>
-              <Link to="/account-section/wishlist">
+              <Link to="/wishlist">
                 <Heart />
               </Link>
             </div>
@@ -81,4 +94,4 @@ const WomenProduct: React.FC = React.memo(() => {
   );
 });
 
-export default WomenProduct;
+export default MenProduct;

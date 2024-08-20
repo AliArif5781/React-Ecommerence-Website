@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import img from "/logo_black.svg";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import img2 from "/logo_white.svg";
+import img1 from "/logo_white.svg";
 import {
   UserRound,
   Heart,
@@ -16,6 +16,7 @@ import {
 import { auth, db } from "../firebase/Firebase";
 import { doc, getDoc } from "firebase/firestore";
 import Loader from "./Loader";
+import { toast } from "react-toastify";
 
 interface UserDetails {
   photo: string;
@@ -43,7 +44,6 @@ const Navbar = () => {
       window.removeEventListener("scroll", scrollBar);
     };
   }, [scrollBar]);
-  // [doc] contain db in our firebase store ,["Users"] this is the name of our collection [uid] which we have to find
 
   useEffect(() => {
     const unscubscribe = auth.onAuthStateChanged(async (user) => {
@@ -64,6 +64,7 @@ const Navbar = () => {
 
     try {
       const docRef = doc(db, "Users", user.uid); // Reference to user document
+      // [doc] contain db in our firebase store ,["Users"] this is the name of our collection [uid] which we have to find
       const docSnap = await getDoc(docRef); // Get document snapshot
       if (docSnap.exists()) {
         // console.log("User details:", docSnap.data());
@@ -82,9 +83,13 @@ const Navbar = () => {
     try {
       await auth.signOut();
       navigate("/account-section/login");
-      console.log("User Logged out successfully");
-    } catch (error) {
-      console.error("Error Logged out:", error);
+      // console.log("User Logged out successfully");
+    } catch (error: any) {
+      toast.error(error.message, {
+        position: "top-center",
+        autoClose: 200,
+      });
+      // console.error("Error Logged out:", error);
     }
   };
 
@@ -191,38 +196,6 @@ const Navbar = () => {
                                   className="hover:text-gray-400 hover:underline "
                                 >
                                   Women Clothes
-                                </Link>
-                              </li>
-                            </ul>
-                          </div>
-                          {/*  */}
-                          <div>
-                            <h3 className="font-bold whitespace-nowrap">
-                              Children Clothing
-                            </h3>
-                            <ul className=" space-y-1">
-                              <li className=" leading-loose">
-                                <Link
-                                  to="/childrenProduct"
-                                  className="hover:text-gray-400 hover:underline "
-                                >
-                                  Children
-                                </Link>
-                              </li>
-                            </ul>
-                          </div>
-                          {/*  */}
-                          <div>
-                            <h3 className="font-bold whitespace-nowrap">
-                              laptop
-                            </h3>
-                            <ul className=" space-y-1">
-                              <li className=" leading-loose">
-                                <Link
-                                  to="/laptop"
-                                  className="hover:text-gray-400 hover:underline "
-                                >
-                                  laptop
                                 </Link>
                               </li>
                             </ul>
@@ -344,9 +317,9 @@ const Navbar = () => {
                 <Link to={"/wishlist"}>
                   <Heart className="h-[19px] w-[19px] cursor-pointer" />
                 </Link>
-                <div>
+                <Link to={"/account-section/productCart"}>
                   <ShoppingCart className="h-[19px] w-[19px] cursor-pointer" />
-                </div>
+                </Link>
               </div>
             </>
           )}
@@ -356,16 +329,16 @@ const Navbar = () => {
       <div
         className={`text-white fixed top-0 left-0 h-full w-full bg-slate-900 transform ${
           isMenuOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 ease-in-out z-20`}
+        } transition-transform duration-300 ease-in-out z-20 overflow-y-auto`}
       >
         <div className="flex justify-between items-center bg-slate-950 p-5">
           {/* Hidden logo */}
           <div>
-            <img className="h-[26px] text-white hidden" src={img2} alt="Logo" />
+            <img className="h-[24px] text-white hidden" src={img1} alt="Logo" />
           </div>
           {/* Logo */}
           <div className="flex justify-center items-center cursor-pointer">
-            <img className="h-[26px] text-white" src={img2} alt="Logo" />
+            <img className="h-[24px] text-white" src={img1} alt="Logo" />
           </div>
           <button onClick={() => setIsMenuOpen(false)}>
             {/* X icon to close the menu */}
@@ -515,7 +488,7 @@ const Navbar = () => {
                   </Link>
                 </div>
               </div>
-              <div className="text-base flex">
+              <div className="text-base flex py-2 ">
                 Welcome,
                 <p className="text-balance text-gray-500 font-bold pl-2">
                   {userDetails?.firstName.toUpperCase()}{" "}

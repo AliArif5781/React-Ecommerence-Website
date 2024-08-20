@@ -34,14 +34,12 @@ const Register = () => {
       navigate("/account-section/login");
       toast.success("User Registered Successfully", {
         position: "top-center",
-        style: { backgroundColor: "black", color: "white" },
         autoClose: 2000,
       });
       // console.log("User Registered Successfully");
     } catch (error: any) {
       toast.error(error.message, {
         position: "bottom-center",
-        style: { backgroundColor: "black", color: "white" },
         autoClose: 2000,
       });
       // console.log("User Not Registered Successfully!!!");

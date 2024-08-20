@@ -22,7 +22,6 @@ const Login = () => {
       // console.log("User logged in Successfully");
       toast.success("logged in Successfully", {
         position: "top-center",
-        style: { backgroundColor: "black", color: "whitesmoke" },
         autoClose: 2000,
       });
       navigate("/");

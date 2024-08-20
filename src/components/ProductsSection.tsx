@@ -2,10 +2,11 @@ import { Link } from "react-router-dom";
 import img2 from "/ProductSection/img1.jpg";
 import img3 from "/ProductSection/img2.jpg";
 import img4 from "/ProductSection/img3.jpg";
-import img5 from "/ProductSection/img4.jpg";
+// import img5 from "/ProductSection/img4.jpg";
 import img6 from "/ProductSection/img5.jpg";
+import { memo } from "react";
 
-const ProductsSection = () => {
+const ProductsSection = memo(() => {
   return (
     <section className="text-gray-600 body-font flex justify-center items-center">
       <div className="container px-5 py-24 mx-auto">
@@ -24,6 +25,7 @@ const ProductsSection = () => {
                 className="lg:h-96 md:h-72 sm:h-56 w-full object-cover object-center"
                 src={img2}
                 alt="Men's Clothing"
+                loading="lazy"
               />
               <div className="p-6">
                 <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
@@ -66,6 +68,7 @@ const ProductsSection = () => {
                 className="lg:h-96 md:h-72 sm:h-56 w-full object-cover object-center"
                 src={img3}
                 alt="Women's Clothing"
+                loading="lazy"
               />
               <div className="p-6">
                 <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
@@ -108,6 +111,7 @@ const ProductsSection = () => {
                 className="lg:h-96 md:h-72 sm:h-56 w-full object-cover object-center"
                 src={img4}
                 alt="Baby Clothes"
+                loading="lazy"
               />
               <div className="p-6">
                 <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
@@ -151,12 +155,13 @@ const ProductsSection = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <Link to={"/laptop"} className="flex justify-center items-center">
+          {/* <Link to={"/laptop"} className="flex justify-center items-center">
             <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl  duration-500 ease-in-out">
               <img
                 className="lg:h-96 md:h-72 sm:h-56 w-full object-cover object-center"
                 src={img5}
                 alt="Laptop"
+                loading="lazy"
               />
               <div className="p-6">
                 <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
@@ -188,7 +193,7 @@ const ProductsSection = () => {
                 </div>
               </div>
             </div>
-          </Link>
+          </Link> */}
 
           <Link
             to={"/techAccesories"}
@@ -199,6 +204,7 @@ const ProductsSection = () => {
                 className="lg:h-96 md:h-72 sm:h-56 w-full object-cover object-center"
                 src={img6}
                 alt="Mobile Accesories"
+                loading="lazy"
               />
               <div className="p-6">
                 <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
@@ -235,6 +241,6 @@ const ProductsSection = () => {
       </div>
     </section>
   );
-};
+});
 
 export default ProductsSection;

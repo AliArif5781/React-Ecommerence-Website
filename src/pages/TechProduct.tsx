@@ -4,14 +4,15 @@ import Skeleton from "../components/Skeleton";
 import Error from "./Error";
 import { Heart } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../features/CartSlice";
+import { toast } from "react-toastify";
 
 const TechProduct = () => {
+  const dispatch = useDispatch();
+
   const { data, isLoading, isError } =
     useGetElectronicProductQuery("electronics");
-
-  useEffect(() => {
-    console.log(data);
-  }, [data]);
 
   if (isLoading) {
     return (
@@ -34,6 +35,14 @@ const TechProduct = () => {
       </div>
     );
   }
+
+  const handleToCart = (product: Product) => {
+    dispatch(addToCart(product));
+    toast.success(`${product.title}`, {
+      position: "top-center",
+      autoClose: 2000,
+    });
+  };
   return (
     <>
       <div className="h-[100vh] pt-20 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 place-items-center text-gray-600 border-gray-200 border-opacity-60">
@@ -70,10 +79,13 @@ const TechProduct = () => {
             </p>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="text-sm font-semibold text-center text-white bg-black p-2 rounded cursor-pointer">
+                <button
+                  className="text-sm font-semibold text-center text-white bg-black p-2 rounded cursor-pointer"
+                  onClick={() => handleToCart(curProd)}
+                >
                   Add to Cart
-                </div>
-                <Link to={"/account-section/wishlist"}>
+                </button>
+                <Link to={"/wishlist"}>
                   <Heart />
                 </Link>
               </div>

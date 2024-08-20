@@ -9,10 +9,11 @@ import { AuthProvider } from "../routes/AuthContext";
 import MenProduct from "../pages/MenProduct";
 import WomenProduct from "../pages/WomenProduct";
 import TechProduct from "../pages/TechProduct";
-import Laptop from "../pages/Laptop";
 import About from "../pages/About";
 import BabyProduct from "../pages/BabyProduct";
 import Whislist from "../pages/Whislist";
+import Cart from "../pages/Cart";
+import Error from "../pages/Error";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
         <Layout />
       </AuthProvider>
     ),
+    errorElement: <Error />,
     children: [
       {
         path: "",
@@ -45,10 +47,6 @@ const router = createBrowserRouter([
         element: <ProtectedRoute Element={TechProduct} />,
       },
       {
-        path: "laptop",
-        element: <ProtectedRoute Element={Laptop} />,
-      },
-      {
         path: "aboutus",
         element: <About />,
       },
@@ -65,6 +63,7 @@ const router = createBrowserRouter([
         <Lay />
       </AuthProvider>
     ),
+    errorElement: <Error />,
     children: [
       {
         path: "login",
@@ -73,6 +72,10 @@ const router = createBrowserRouter([
       {
         path: "register",
         element: <ProtectedRoute isAuthPage={true} Element={Register} />,
+      },
+      {
+        path: "productCart",
+        element: <ProtectedRoute Element={Cart} />,
       },
     ],
   },
