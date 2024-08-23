@@ -24,6 +24,9 @@ export const productApi = createApi({
     getElectronicProduct: builder.query({
       query: (product) => `products/category/${product}`,
     }),
+    getJeweleryProduct: builder.query({
+      query: (product) => `products/category/${product}`,
+    }),
   }),
 });
 
@@ -32,4 +35,5 @@ export const {
   useGetSingleProductQuery,
   useGetWomenProductQuery,
   useGetElectronicProductQuery,
+  useGetJeweleryProductQuery,
 } = productApi;

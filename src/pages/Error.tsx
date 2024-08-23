@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { TriangleAlert } from "lucide-react";
 
 const Error = () => {
@@ -9,12 +9,12 @@ const Error = () => {
           <TriangleAlert className="h-full w-full dark:text-gray-500" />
         </div>
         <div className="text-5xl font-bold p-5">Oops Error!</div>
-        <Link
+        <NavLink
           to={"/"}
           className="font-semibold text-gray-500 p-5 hover:underline"
         >
           Go to home Page
-        </Link>
+        </NavLink>
       </div>
     </div>
   );

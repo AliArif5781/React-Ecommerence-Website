@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import img2 from "/ProductSection/img1.jpg";
 import img3 from "/ProductSection/img2.jpg";
-import img4 from "/ProductSection/img3.jpg";
-// import img5 from "/ProductSection/img4.jpg";
 import img6 from "/ProductSection/img5.jpg";
+import img1 from "/ProductSection/1.jpg";
 import { memo } from "react";
 
 const ProductsSection = memo(() => {
@@ -103,13 +102,13 @@ const ProductsSection = memo(() => {
           </Link>
 
           <Link
-            to={"/childrenProduct"}
+            to={"/jewelleryProduct"}
             className="flex justify-center items-center"
           >
             <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl duration-500 ease-in-out">
               <img
                 className="lg:h-96 md:h-72 sm:h-56 w-full object-cover object-center"
-                src={img4}
+                src={img1}
                 alt="Baby Clothes"
                 loading="lazy"
               />
@@ -118,11 +117,11 @@ const ProductsSection = memo(() => {
                   CATEGORY
                 </h2>
                 <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
-                  Baby Clothes
+                  Jewellery
                 </h1>
                 <p className="leading-relaxed mb-3">
-                  Wrap your little one in comfort and style with our charming
-                  collection of baby clothes. Each piece is crafted from soft.
+                  Jewelry is a symbol of love, luxury, and legacy. It's a way to
+                  express oneself, to tell a story, and to pass down traditions.
                 </p>
                 <div className="flex items-center flex-wrap">
                   <button className="text-slate-500 inline-flex items-center md:mb-2 lg:mb-0 hover:bg-black transition duration-300 rounded py-[5px] px-2 justify-center hover:text-white hover:font-bold">

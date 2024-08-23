@@ -62,7 +62,7 @@ const Carousel = () => {
       <div className="pt-[72px] max-w-[100%] h-[600px] w-full m-auto relative group">
         <div
           style={slideStyle}
-          className="h-[100%] w-full bg-center bg-cover duration-500"
+          className=" h-full w-full bg-center bg-cover duration-500"
         >
           <div className="h-full flex flex-col justify-center items-center text-center w-full text-white bg-black bg-opacity-50">
             <h1 className="uppercase md:text-5xl text-3xl font-bold pt-32">

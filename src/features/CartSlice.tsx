@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Product } from "./ApiSlice"; // Import the Product type from your ApiSlice
+import { Product } from "./ApiSlice";
 
 // Extending Product to include quantity for cart items
 export interface CartItem extends Product {
@@ -12,7 +12,7 @@ const initialState: CartItem[] = JSON.parse(
 );
 
 const cartSlice = createSlice({
-  name: "cart", // Slice name, used as a prefix for action types
+  name: "cart",
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<Product>) => {
@@ -23,7 +23,6 @@ const cartSlice = createSlice({
         existingProduct.quantity += 1;
       } else {
         state.push({ ...action.payload, quantity: 1 });
-        // A new product is added to the cart with a quantity of 1. The spread operator (...) is used to copy all properties of action.payload into a new object, and quantity: 1 is added to this object.
       }
       localStorage.setItem("cart", JSON.stringify(state));
     },
@@ -32,8 +31,44 @@ const cartSlice = createSlice({
       localStorage.setItem("cart", JSON.stringify(updatedState));
       return updatedState;
     },
+    incrementQuantity: (state, action: PayloadAction<number>) => {
+      const IncreaseAmount = state.find((item) => {
+        return item.id === action.payload;
+      });
+      if (IncreaseAmount) {
+        IncreaseAmount.quantity += 1;
+      }
+      localStorage.setItem("cart", JSON.stringify(state));
+    },
+    decrementQuantity: (state, action: PayloadAction<number>) => {
+      const decrementAmount = state.find((item) => {
+        return item.id === action.payload;
+      });
+      if (decrementAmount) {
+        if (decrementAmount.quantity > 1) {
+          decrementAmount.quantity -= 1;
+        }
+        localStorage.setItem("cart", JSON.stringify(state));
+      }
+    },
   },
 });
 
-export const { addToCart, removeToCart } = cartSlice.actions;
+export const { addToCart, removeToCart, incrementQuantity, decrementQuantity } =
+  cartSlice.actions;
+
+export const calculateTotalPrice = (state: CartItem[]) => {
+  return state.reduce((acc, item) => {
+    return acc + item.price * item.quantity;
+  }, 0);
+};
+export const QuantityValue = (state: CartItem[]) => {
+  return state.reduce((acc, item) => {
+    return acc + item.quantity;
+  }, 0);
+};
 export default cartSlice.reducer;
+
+// Extending Product to include quantity for cart items
+// The cart's initial state, an empty array of items
+// A new product is added to the cart with a quantity of 1. The spread operator (...) is used to copy all properties of action.payload into a new object, and quantity: 1 is added to this object.

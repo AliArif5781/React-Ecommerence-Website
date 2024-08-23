@@ -1,16 +1,27 @@
-import { RootState } from "../features/Store";
 import { CartItemProps } from "./Cart";
-import { useDispatch, useSelector } from "react-redux";
-import { removeToCart } from "../features/CartSlice";
+import { useDispatch } from "react-redux";
+import {
+  decrementQuantity,
+  removeToCart,
+  incrementQuantity,
+} from "../features/CartSlice";
+import { IoMdAdd, IoMdRemove } from "react-icons/io";
 
 const CartItems = ({ item }: CartItemProps) => {
-  const { category, description, id, image, price, title } = item;
+  const { category, description, id, image, price, title, quantity } = item;
 
   const dispatch = useDispatch();
-  // const cartSelector = useSelector((state: RootState) => state.cart);
 
   const removeCart = (product: number) => {
     dispatch(removeToCart(product));
+  };
+
+  const IncreaseAmount = (product: number) => {
+    dispatch(incrementQuantity(product));
+  };
+
+  const decrementAmount = (product: number) => {
+    dispatch(decrementQuantity(product));
   };
   return (
     <>
@@ -31,22 +42,25 @@ const CartItems = ({ item }: CartItemProps) => {
           </td>
           <td className="px-10 py-4">
             <div className="flex flex-1 max-w-[100px] items-center h-full border text-primary font-medium p-2">
-              <div className="flex-1 flex justify-center items-center cursor-pointer h-full">
-                {/* <IoMdRemove /> */}
+              <div
+                className="flex-1 flex justify-center items-center cursor-pointer h-full"
+                onClick={() => decrementAmount(id)}
+              >
+                <IoMdRemove />
               </div>
               <div className="h-full flex justify-center items-center px-2">
-                {/* {amount} */}
+                {quantity}
               </div>
               <div
-                // onClick={() => IncreaseAmount(id)}
                 className="flex-1 h-full flex justify-center items-center cursor-pointer"
+                onClick={() => IncreaseAmount(id)}
               >
-                {/* <IoMdAdd /> */}
+                <IoMdAdd />
               </div>
             </div>
           </td>
           <td className="px-6 py-4 text-slate-800 text-[17px] font-bold">
-            ${price.toFixed(2)}
+            ${(price * quantity).toFixed(2)}
           </td>
           <td className="px-6 py-4">
             <button

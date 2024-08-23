@@ -17,6 +17,9 @@ import { auth, db } from "../firebase/Firebase";
 import { doc, getDoc } from "firebase/firestore";
 import Loader from "./Loader";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { RootState } from "../features/Store";
+import { QuantityValue } from "../features/CartSlice";
 
 interface UserDetails {
   photo: string;
@@ -34,6 +37,8 @@ const Navbar = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   const navigate = useNavigate();
+  const cartItems = useSelector((state: RootState) => state.cart);
+  const totalQuantity = QuantityValue(cartItems);
   const scrollBar = useCallback(() => {
     window.scrollY > 60 ? setScrollIsActive(true) : setScrollIsActive(false);
   }, []);
@@ -215,6 +220,21 @@ const Navbar = () => {
                               </li>
                             </ul>
                           </div>
+                          <div>
+                            <h3 className="font-bold whitespace-nowrap">
+                              Jewellery Product
+                            </h3>
+                            <ul className=" space-y-1">
+                              <li className=" leading-loose">
+                                <Link
+                                  to="/jewelleryProduct"
+                                  className="hover:text-gray-400 hover:underline "
+                                >
+                                  Jewellery Product
+                                </Link>
+                              </li>
+                            </ul>
+                          </div>
                         </div>
                       </div>
                     )}
@@ -319,6 +339,9 @@ const Navbar = () => {
                 </Link>
                 <Link to={"/account-section/productCart"}>
                   <ShoppingCart className="h-[19px] w-[19px] cursor-pointer" />
+                  <div className="bg-black absolute right-2 bottom-9  md:right-7 md:bottom-9 text-[12px] w-[18px] h-[18px] text-white rounded-full flex justify-center items-center">
+                    {totalQuantity}
+                  </div>
                 </Link>
               </div>
             </>

@@ -1,19 +1,16 @@
-import React from "react";
-import Skeleton from "../components/Skeleton";
-import { Product, useGetSingleProductQuery } from "../features/ApiSlice";
-import Error from "./Error";
-import { Link } from "react-router-dom";
 import { Heart } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Product, useGetJeweleryProductQuery } from "../features/ApiSlice";
+import Error from "./Error";
+import Skeleton from "../components/Skeleton";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../features/CartSlice";
 import { toast } from "react-toastify";
 
-const MenProduct: React.FC = React.memo(() => {
-  const { data, isLoading, isError } =
-    useGetSingleProductQuery("men's clothing");
+const JewelleryProduct = () => {
+  const { data, isError, isLoading } = useGetJeweleryProductQuery("jewelery");
 
   const dispatch = useDispatch();
-
   // If data is loading, show skeletons
   if (isLoading) {
     return (
@@ -38,11 +35,9 @@ const MenProduct: React.FC = React.memo(() => {
     dispatch(addToCart(product));
     toast.success(`${product.title}`, {
       position: "top-center",
-      autoClose: 2000,
-      style: { backgroundColor: "black", color: "white" },
+      autoClose: 5000,
     });
   };
-  // If data is successfully fetched, render the product list
   return (
     <div className="h-[100vh] pt-20 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 place-items-center text-gray-600 border-gray-200 border-opacity-60">
       <div className="group mt-10 col-span-full">
@@ -92,6 +87,6 @@ const MenProduct: React.FC = React.memo(() => {
       ))}
     </div>
   );
-});
+};
 
-export default MenProduct;
+export default JewelleryProduct;

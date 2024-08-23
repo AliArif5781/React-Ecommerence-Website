@@ -10,10 +10,10 @@ import MenProduct from "../pages/MenProduct";
 import WomenProduct from "../pages/WomenProduct";
 import TechProduct from "../pages/TechProduct";
 import About from "../pages/About";
-import BabyProduct from "../pages/BabyProduct";
 import Whislist from "../pages/Whislist";
 import Cart from "../pages/Cart";
 import Error from "../pages/Error";
+import JewelleryProduct from "../pages/JewelleryProduct";
 
 const router = createBrowserRouter([
   {
@@ -39,8 +39,8 @@ const router = createBrowserRouter([
         element: <ProtectedRoute Element={WomenProduct} />,
       },
       {
-        path: "childrenProduct",
-        element: <ProtectedRoute Element={BabyProduct} />,
+        path: "jewelleryProduct",
+        element: <ProtectedRoute Element={JewelleryProduct} />,
       },
       {
         path: "techAccesories",
