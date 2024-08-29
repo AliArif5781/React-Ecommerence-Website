@@ -14,6 +14,11 @@ import Whislist from "../pages/Whislist";
 import Cart from "../pages/Cart";
 import Error from "../pages/Error";
 import JewelleryProduct from "../pages/JewelleryProduct";
+import ShirtSelection from "../../src/pages/ShirtSelection";
+import ShirtCustomization from "../pages/ShirtCustomization";
+import StoreTwo from "../features/StoreTwo";
+import { Provider } from "react-redux";
+import CustomDesign from "../pages/CustomDesign";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +36,6 @@ const router = createBrowserRouter([
       },
       {
         path: "menProduct",
-        // element: <MenProduct />,
         element: <ProtectedRoute Element={MenProduct} />,
       },
       {
@@ -53,6 +57,22 @@ const router = createBrowserRouter([
       {
         path: "wishlist",
         element: <ProtectedRoute Element={Whislist} />,
+      },
+      {
+        path: "customdesign",
+        element: <ProtectedRoute Element={ShirtSelection} />,
+      },
+      {
+        path: "customize/:shirtType",
+        element: (
+          <Provider store={StoreTwo}>
+            <ProtectedRoute Element={ShirtCustomization} />
+          </Provider>
+        ),
+      },
+      {
+        path: "customDesignToCart",
+        element: <ProtectedRoute Element={CustomDesign} />,
       },
     ],
   },

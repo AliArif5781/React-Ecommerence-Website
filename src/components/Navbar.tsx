@@ -235,6 +235,21 @@ const Navbar = () => {
                               </li>
                             </ul>
                           </div>
+                          <div>
+                            <h3 className="font-bold whitespace-nowrap">
+                              Custom Design
+                            </h3>
+                            <ul className=" space-y-1">
+                              <li className=" leading-loose">
+                                <Link
+                                  to="/customdesign"
+                                  className="hover:text-gray-400 hover:underline "
+                                >
+                                  Custom Design
+                                </Link>
+                              </li>
+                            </ul>
+                          </div>
                         </div>
                       </div>
                     )}

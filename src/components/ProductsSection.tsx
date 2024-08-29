@@ -3,6 +3,7 @@ import img2 from "/ProductSection/img1.jpg";
 import img3 from "/ProductSection/img2.jpg";
 import img6 from "/ProductSection/img5.jpg";
 import img1 from "/ProductSection/1.jpg";
+import img4 from "/ProductSection/1.svg";
 import { memo } from "react";
 
 const ProductsSection = memo(() => {
@@ -215,6 +216,56 @@ const ProductsSection = memo(() => {
                 <p className="leading-relaxed mb-3">
                   Enhance your tech experience with our premium collection of
                   accessories, designed to complement and elevate your devices.
+                </p>
+                <div className="flex items-center flex-wrap">
+                  <button className="text-slate-500 inline-flex items-center md:mb-2 lg:mb-0 hover:bg-black transition duration-300 rounded py-[5px] px-2 justify-center hover:text-white hover:font-bold">
+                    Click here
+                    <svg
+                      className="w-4 h-4 ml-2"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M5 12h14"></path>
+                      <path d="M12 5l7 7-7 7"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </Link>
+        </div>
+        <div className="group mt-10">
+          <h1 className="text-5xl text-center mb-10 text-black transition-transform transform hover:scale-105 hover:transition-all hover:duration-500 hover:ease-in-out hover:font-bold relative">
+            Custom Design
+            <span className="block absolute left-0 bottom-0 w-full h-0.5 bg-black scale-x-0 origin-left transition-transform duration-500 ease-in-out group-hover:scale-x-100"></span>
+          </h1>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <Link
+            to={"/customdesign"}
+            className="flex justify-center items-center"
+          >
+            <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl  duration-500 ease-in-out">
+              <img
+                className="lg:h-96 md:h-72 sm:h-56 w-full object-cover object-center"
+                src={img4}
+                alt="Mobile Accesories"
+                loading="lazy"
+              />
+              <div className="p-6">
+                <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">
+                  CATEGORY
+                </h2>
+                <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
+                  Custom Design
+                </h1>
+                <p className="leading-relaxed mb-3">
+                  Allow customers to unleash their creativity and design their
+                  own products, from custom logos to personalized messages.
                 </p>
                 <div className="flex items-center flex-wrap">
                   <button className="text-slate-500 inline-flex items-center md:mb-2 lg:mb-0 hover:bg-black transition duration-300 rounded py-[5px] px-2 justify-center hover:text-white hover:font-bold">
