@@ -19,15 +19,18 @@ const ShirtCustomization: React.FC = () => {
   const shirtContainerRef = useRef<HTMLDivElement>(null);
   const [nextId, setNextId] = useState<number>(1);
   const [board, setBoard] = useState<PictureItem | null>(null);
-  // const [loading, setLoading] = useState<boolean>(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   useEffect(() => {
     const savedBoard = localStorage.getItem("board");
     if (savedBoard) {
       const parsedBoard: PictureItem | null = JSON.parse(savedBoard);
-      setBoard(parsedBoard);
-      // setNextId(parsedBoard ? parsedBoard.id + 1 : 11);
+      if (parsedBoard && parsedBoard.id && parsedBoard.url) {
+        setBoard(parsedBoard);
+        // setNextId(parsedBoard.id + 1); // Ensure nextId is incremented
+      }
     }
   }, []);
 
@@ -39,7 +42,6 @@ const ShirtCustomization: React.FC = () => {
 
   const triggerFileInput = () => {
     fileInputRef.current?.click();
-    // setLoading(true);
   };
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +50,8 @@ const ShirtCustomization: React.FC = () => {
       const reader = new FileReader();
       reader.onload = (e) => {
         const newPicture: PictureItem = {
-          id: nextId + Math.random() * 100,
+          // id: nextId + Math.random() * 100 + 1,
+          id: nextId + Date.now(),
           url: e.target?.result as string,
           top: 40,
           left: 40,
@@ -61,7 +64,6 @@ const ShirtCustomization: React.FC = () => {
       };
       reader.readAsDataURL(file);
     }
-    // setLoading(false);
   };
 
   const removeImg = () => {
@@ -77,17 +79,9 @@ const ShirtCustomization: React.FC = () => {
       };
       console.log("shirtTwo", cartItem);
 
-      // Dispatch to Redux
       dispatch(addItemToCart(cartItem));
 
-      // Save to localStorage as well
-      // const existingCart = localStorage.getItem("cart");
-      // const cart = existingCart ? JSON.parse(existingCart) : [];
-      // cart.push(cartItem);
-      // localStorage.setItem("cart", JSON.stringify(cart));
-
       setBoard(null);
-      // localStorage.removeItem("board");
       navigate("/customDesignToCart");
     }
   };
@@ -98,6 +92,7 @@ const ShirtCustomization: React.FC = () => {
         ...board,
         x: info.offset.x,
         y: info.offset.y,
+        shirtType: shirtType || "white",
       };
       setBoard(newBoard);
       localStorage.setItem("board", JSON.stringify(newBoard));
