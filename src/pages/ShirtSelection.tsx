@@ -16,7 +16,7 @@ const ShirtSelection: React.FC = () => {
         Select T-Shirt
       </h1>
       <span className="text-sm sm:text-base text-center mb-8">
-        Select one of the following t-shirts for custom designing.
+        Select one of the following T-shirts for custom designing.
       </span>
       <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-8">
         <div

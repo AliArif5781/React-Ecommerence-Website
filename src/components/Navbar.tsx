@@ -168,7 +168,7 @@ const Navbar = () => {
                     onMouseEnter={() => setIsFabricDropDown(true)}
                     onMouseLeave={() => setIsFabricDropDown(false)}
                   >
-                    <ul className="font-semibold">
+                    <ul className="font-semibold cursor-pointer">
                       Fabric <span className="font-bold"></span>
                     </ul>
                     {isFabricDropDown && (

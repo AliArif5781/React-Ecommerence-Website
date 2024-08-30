@@ -1,26 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { RootState } from "../features/StoreTwo";
+import { CartItem, setCartFromLocalStorage } from "../features/AddItemCart";
 
 const CustomDesign: React.FC = () => {
-  const [cartItems, setCartItems] = useState<any[]>([]);
-
+  const cartItems = useSelector((state: RootState) => state.cart.items);
+  const dispatch = useDispatch();
   useEffect(() => {
-    const savedCartItems = localStorage.getItem("cart");
-    if (savedCartItems) {
-      setCartItems(JSON.parse(savedCartItems));
+    // Load cart from local storage into the Redux store
+    const savedCart = localStorage.getItem("board");
+    if (savedCart) {
+      dispatch(setCartFromLocalStorage(JSON.parse(savedCart)));
     }
   }, []);
 
-  // Function to handle item removal
-  const handleRemoveItem = (itemId: number) => {
-    const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
-    setCartItems(updatedCartItems);
-    localStorage.setItem("cart", JSON.stringify(updatedCartItems));
-  };
-
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4">
-      {/* <h1 className="text-3xl font-semibold mb-4">Your Cart</h1> */}
+      {/* <h2 className="text-2xl font-bold mb-4">Your Cart</h2> */}
+      {/* <p className="mb-4">Number of items in cart: {cartItems.length}</p> */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {cartItems.length === 0 ? (
           <div className="col-span-full flex flex-col items-center justify-center text-center">
@@ -33,7 +31,7 @@ const CustomDesign: React.FC = () => {
             </Link>
           </div>
         ) : (
-          cartItems.map((item: any) => (
+          cartItems.map((item: CartItem) => (
             <div
               key={item.id}
               className="relative bg-gray-100 p-4 border border-gray-200 rounded-lg shadow-md w-full h-[500px]"
@@ -62,7 +60,7 @@ const CustomDesign: React.FC = () => {
               />
               <p className="mt-2 text-lg">Shirt ID: {item.id}</p>
               <button
-                onClick={() => handleRemoveItem(item.id)}
+                // onClick={() => handleRemoveItem(item.id)}
                 className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded"
               >
                 Remove

@@ -60,7 +60,11 @@ const router = createBrowserRouter([
       },
       {
         path: "customdesign",
-        element: <ProtectedRoute Element={ShirtSelection} />,
+        element: (
+          <Provider store={StoreTwo}>
+            <ProtectedRoute Element={ShirtSelection} />,
+          </Provider>
+        ),
       },
       {
         path: "customize/:shirtType",
@@ -72,7 +76,11 @@ const router = createBrowserRouter([
       },
       {
         path: "customDesignToCart",
-        element: <ProtectedRoute Element={CustomDesign} />,
+        element: (
+          <Provider store={StoreTwo}>
+            <ProtectedRoute Element={CustomDesign} />,
+          </Provider>
+        ),
       },
     ],
   },

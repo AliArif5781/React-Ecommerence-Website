@@ -1,32 +1,44 @@
-// src/features/cart/cartSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PictureItem } from "../pages/ShirtCustomization";
 
-// Define CartItem using PictureItem to maintain consistency
 export interface CartItem extends PictureItem {
-  shirtType: string; // Type of shirt (white, black, etc.)
+  shirtType: string;
 }
 
 export interface CartState {
   items: CartItem[];
 }
 
-const initialState: CartState = {
-  items: [],
+const loadCartFromLocalStorage = (): CartState => {
+  const savedCart = localStorage.getItem("board");
+  if (savedCart) {
+    return {
+      items: JSON.parse(savedCart),
+    };
+  }
+  return { items: [] };
 };
 
-const Slice = createSlice({
+const initialState: CartState = loadCartFromLocalStorage();
+
+const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
     addItemToCart(state, action: PayloadAction<CartItem>) {
       state.items.push(action.payload);
+      localStorage.setItem("board", JSON.stringify(state.items));
     },
     clearCart(state) {
       state.items = [];
+      localStorage.removeItem("board");
+    },
+    setCartFromLocalStorage(state, action: PayloadAction<CartItem[]>) {
+      state.items = action.payload;
     },
   },
 });
 
-export const { addItemToCart, clearCart } = Slice.actions;
-export default Slice.reducer;
+export const { addItemToCart, clearCart, setCartFromLocalStorage } =
+  cartSlice.actions;
+export default cartSlice.reducer;

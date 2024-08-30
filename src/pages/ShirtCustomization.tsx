@@ -1,6 +1,5 @@
-// src/components/ShirtCustomization.tsx
 import React, { useRef, useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { motion, PanInfo } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { addItemToCart } from "../features/AddItemCart";
@@ -20,15 +19,15 @@ const ShirtCustomization: React.FC = () => {
   const shirtContainerRef = useRef<HTMLDivElement>(null);
   const [nextId, setNextId] = useState<number>(1);
   const [board, setBoard] = useState<PictureItem | null>(null);
-
+  // const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   useEffect(() => {
     const savedBoard = localStorage.getItem("board");
     if (savedBoard) {
       const parsedBoard: PictureItem | null = JSON.parse(savedBoard);
       setBoard(parsedBoard);
-      setNextId(parsedBoard ? parsedBoard.id + 1 : 1);
+      // setNextId(parsedBoard ? parsedBoard.id + 1 : 11);
     }
   }, []);
 
@@ -40,6 +39,7 @@ const ShirtCustomization: React.FC = () => {
 
   const triggerFileInput = () => {
     fileInputRef.current?.click();
+    // setLoading(true);
   };
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +48,7 @@ const ShirtCustomization: React.FC = () => {
       const reader = new FileReader();
       reader.onload = (e) => {
         const newPicture: PictureItem = {
-          id: nextId,
+          id: nextId + Math.random() * 100,
           url: e.target?.result as string,
           top: 40,
           left: 40,
@@ -61,6 +61,7 @@ const ShirtCustomization: React.FC = () => {
       };
       reader.readAsDataURL(file);
     }
+    // setLoading(false);
   };
 
   const removeImg = () => {
@@ -74,18 +75,20 @@ const ShirtCustomization: React.FC = () => {
         ...board,
         shirtType: shirtType || "white",
       };
+      console.log("shirtTwo", cartItem);
 
       // Dispatch to Redux
       dispatch(addItemToCart(cartItem));
 
       // Save to localStorage as well
-      const existingCart = localStorage.getItem("cart");
-      const cart = existingCart ? JSON.parse(existingCart) : [];
-      cart.push(cartItem);
-      localStorage.setItem("cart", JSON.stringify(cart));
+      // const existingCart = localStorage.getItem("cart");
+      // const cart = existingCart ? JSON.parse(existingCart) : [];
+      // cart.push(cartItem);
+      // localStorage.setItem("cart", JSON.stringify(cart));
 
       setBoard(null);
-      localStorage.removeItem("board");
+      // localStorage.removeItem("board");
+      navigate("/customDesignToCart");
     }
   };
 
@@ -139,9 +142,10 @@ const ShirtCustomization: React.FC = () => {
       <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-items-center items-center col-span-full">
         <button
           onClick={triggerFileInput}
-          className="px-4 py-2 text-sm md:text-base lg:text-lg bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+          className="px-4 py-2 text-sm md:text-base lg:text-lg bg-black text-white rounded"
         >
           Upload Image
+          {/* {loading ? <Loader /> : "Upload Image"} */}
         </button>
         <input
           type="file"
@@ -152,17 +156,25 @@ const ShirtCustomization: React.FC = () => {
         />
         <button
           onClick={removeImg}
-          className="px-4 py-2 text-sm md:text-base lg:text-lg bg-red-500 text-white rounded hover:bg-red-600 transition"
+          disabled={!board}
+          className={`px-4 py-2 text-sm md:text-base lg:text-lg rounded transition ${
+            board
+              ? "bg-red-500 text-white hover:bg-red-600"
+              : "bg-gray-400 text-gray-700 cursor-not-allowed"
+          }`}
         >
           Remove Image
         </button>
-        <Link
-          to={"/customDesignToCart"}
+        <button
           onClick={handleAddToCart}
-          className="px-4 py-2 text-sm md:text-base lg:text-lg bg-green-500 text-white rounded hover:bg-green-600 transition"
+          className={`px-4 py-2 text-sm md:text-base lg:text-lg rounded transition ${
+            board
+              ? "bg-green-500 text-white hover:bg-green-600"
+              : "bg-gray-400 text-gray-700 cursor-not-allowed"
+          }`}
         >
           Add to Cart
-        </Link>
+        </button>
       </div>
     </div>
   );
