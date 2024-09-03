@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { motion, PanInfo } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { addItemToCart } from "../features/AddItemCart";
-
 export interface PictureItem {
   id: number;
   url: string;
@@ -29,7 +28,9 @@ const ShirtCustomization: React.FC = () => {
       const parsedBoard: PictureItem | null = JSON.parse(savedBoard);
       if (parsedBoard && parsedBoard.id && parsedBoard.url) {
         setBoard(parsedBoard);
+
         // setNextId(parsedBoard.id + 1); // Ensure nextId is incremented
+        // console.log(nextId);
       }
     }
   }, []);
@@ -50,7 +51,7 @@ const ShirtCustomization: React.FC = () => {
       const reader = new FileReader();
       reader.onload = (e) => {
         const newPicture: PictureItem = {
-          // id: nextId + Math.random() * 100 + 1,
+          // id: nextId + Math.random() * 100,
           id: nextId + Date.now(),
           url: e.target?.result as string,
           top: 40,
@@ -82,7 +83,7 @@ const ShirtCustomization: React.FC = () => {
       dispatch(addItemToCart(cartItem));
 
       setBoard(null);
-      navigate("/customDesignToCart");
+      navigate("/account-section/customDesignToCart");
     }
   };
 
@@ -92,7 +93,7 @@ const ShirtCustomization: React.FC = () => {
         ...board,
         x: info.offset.x,
         y: info.offset.y,
-        shirtType: shirtType || "white",
+        // shirtType: shirtType || "white",
       };
       setBoard(newBoard);
       localStorage.setItem("board", JSON.stringify(newBoard));
@@ -100,7 +101,7 @@ const ShirtCustomization: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center h-auto w-full p-4">
+    <div className="flex flex-col justify-center items-center h-auto w-full overflow-x-scroll sm:overflow-x-hidden">
       <h1 className="text-3xl sm:text-5xl font-semibold mb-4 pt-[100px] text-center">
         Customize Your {shirtType === "white" ? "White" : "Black"} Shirt
       </h1>
@@ -111,7 +112,8 @@ const ShirtCustomization: React.FC = () => {
               shirtType === "white" ? "/T-shirt/aa.png" : "/T-shirt/a (1).png"
             }
             alt={`Selected ${shirtType} Shirt`}
-            className=" object-contain lg:w-full h-full sm:object-cover"
+            // className="object-contain lg:w-full h-full sm:object-cover"
+            className="object-cover w-fit h-full "
           />
           {board && (
             <motion.img

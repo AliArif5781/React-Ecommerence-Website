@@ -7,7 +7,7 @@ const ShirtSelection: React.FC = () => {
   const navigate = useNavigate();
 
   const handleShirtClick = (shirtType: string) => {
-    navigate(`/customize/${shirtType}`);
+    navigate(`/account-section/customize/${shirtType}`);
   };
 
   return (
@@ -23,17 +23,13 @@ const ShirtSelection: React.FC = () => {
           className="relative flex justify-center items-center hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer"
           onClick={() => handleShirtClick("black")}
         >
-          <img className="w-full object-cover" src={img1} alt="Black Shirt" />
+          <img className="w-full  object-cover" src={img1} alt="Black Shirt" />
         </div>
         <div
           className="relative flex justify-center items-center hover:scale-105 transition-transform duration-300 ease-in-out cursor-pointer"
           onClick={() => handleShirtClick("white")}
         >
-          <img
-            className="w-full h-full object-cover"
-            src={img2}
-            alt="White Shirt"
-          />
+          <img className="w-full  object-cover" src={img2} alt="White Shirt" />
         </div>
       </div>
       <span>Important:</span>

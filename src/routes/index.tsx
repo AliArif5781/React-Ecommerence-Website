@@ -58,6 +58,29 @@ const router = createBrowserRouter([
         path: "wishlist",
         element: <ProtectedRoute Element={Whislist} />,
       },
+    ],
+  },
+  {
+    path: "/account-section",
+    element: (
+      <AuthProvider>
+        <Lay />
+      </AuthProvider>
+    ),
+    errorElement: <Error />,
+    children: [
+      {
+        path: "login",
+        element: <ProtectedRoute isAuthPage={true} Element={Login} />,
+      },
+      {
+        path: "register",
+        element: <ProtectedRoute isAuthPage={true} Element={Register} />,
+      },
+      {
+        path: "productCart",
+        element: <ProtectedRoute Element={Cart} />,
+      },
       {
         path: "customdesign",
         element: (
@@ -81,29 +104,6 @@ const router = createBrowserRouter([
             <ProtectedRoute Element={CustomDesign} />,
           </Provider>
         ),
-      },
-    ],
-  },
-  {
-    path: "/account-section",
-    element: (
-      <AuthProvider>
-        <Lay />
-      </AuthProvider>
-    ),
-    errorElement: <Error />,
-    children: [
-      {
-        path: "login",
-        element: <ProtectedRoute isAuthPage={true} Element={Login} />,
-      },
-      {
-        path: "register",
-        element: <ProtectedRoute isAuthPage={true} Element={Register} />,
-      },
-      {
-        path: "productCart",
-        element: <ProtectedRoute Element={Cart} />,
       },
     ],
   },
