@@ -1,13 +1,14 @@
 import Skeleton from "../components/Skeleton";
 import { Product, useGetWomenProductQuery } from "../features/ApiSlice";
 import Error from "./Error";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Heart } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../features/CartSlice";
 import { toast } from "react-toastify";
 
 const WomenProduct = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { data, isLoading, isError } =
     useGetWomenProductQuery("women's clothing");
@@ -38,8 +39,12 @@ const WomenProduct = () => {
     dispatch(addToCart(product));
     toast.success(`${product.title}`, {
       position: "top-center",
-      autoClose: 2000,
+      autoClose: 1000,
     });
+  };
+
+  const handleProductClick = (id: number) => {
+    navigate(`/WomenProductDetailPage/${id}`);
   };
   return (
     <>
@@ -55,9 +60,12 @@ const WomenProduct = () => {
         {data?.map((curProd: Product) => (
           <div
             key={curProd.id}
-            className="p-4 w-[90%] max-w-[300px] rounded-lg transition-transform transform hover:scale-105 hover:shadow-xl hover:transition-all hover:duration-500 hover:ease-in-out bg-white"
+            className="p-4 w-[90%] max-w-[300px] rounded-lg transition-transform transform hover:scale-105 hover:shadow-xl hover:transition-all hover:duration-500 hover:ease-in-out bg-white cursor-pointer"
           >
-            <div className="relative h-60 mb-4 flex justify-center items-center overflow-hidden py-2">
+            <div
+              onClick={() => handleProductClick(curProd.id)}
+              className="relative h-60 mb-4 flex justify-center items-center overflow-hidden py-2"
+            >
               <img
                 src={curProd.image}
                 alt={curProd.category}

@@ -104,7 +104,7 @@ const Cart: React.FC<CartItemProps> = () => {
         </div>
       ) : (
         <div className="text-3xl pt-40 text-center">
-          <p className="pb-10 font-roboto text-slate-700">Cart is Empty</p>
+          <p className="pb-10 text-slate-700">Cart is Empty</p>
           <Link to={"/"} className="flex justify-center items-center ">
             <button className="text-2xl sm:text-4xl border p-4 py-5 text bg-black text-white ">
               Continue Shopping

@@ -242,7 +242,7 @@ const Navbar = () => {
                             <ul className=" space-y-1">
                               <li className=" leading-loose">
                                 <Link
-                                  to="/customdesign"
+                                  to="/account-section/customdesign"
                                   className="hover:text-gray-400 hover:underline "
                                 >
                                   Custom Design
@@ -454,6 +454,18 @@ const Navbar = () => {
                     </li>
                   </ul>
                 </div>
+                {/*  */}
+                <div className="px-4 py-2">
+                  <h3 className="font-bold text-gray-400">Custom Designing</h3>
+                  <ul>
+                    <li onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                      <Link to="/account-section/customdesign">
+                        Custom Design
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+                {/*  */}
               </div>
             </div>
           </div>

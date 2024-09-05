@@ -26,6 +26,10 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addItemToCart(state, action: PayloadAction<CartItem>) {
+      if (!Array.isArray(state.items)) {
+        console.error("State.items is not an array");
+        return;
+      }
       state.items.push(action.payload);
       localStorage.setItem("board", JSON.stringify(state.items));
     },

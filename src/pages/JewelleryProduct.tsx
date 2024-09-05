@@ -1,5 +1,5 @@
 import { Heart } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Product, useGetJeweleryProductQuery } from "../features/ApiSlice";
 import Error from "./Error";
 import Skeleton from "../components/Skeleton";
@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 
 const JewelleryProduct = () => {
   const { data, isError, isLoading } = useGetJeweleryProductQuery("jewelery");
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   // If data is loading, show skeletons
   if (isLoading) {
@@ -38,6 +38,11 @@ const JewelleryProduct = () => {
       autoClose: 5000,
     });
   };
+
+  const handleProductClick = (id: number) => {
+    navigate(`/JewelleryProductDetailPage/${id}`);
+  };
+
   return (
     <div className="h-[100vh] pt-20 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 place-items-center text-gray-600 border-gray-200 border-opacity-60">
       <div className="group mt-10 col-span-full">
@@ -51,7 +56,10 @@ const JewelleryProduct = () => {
           key={curProd.id}
           className="p-4 w-[90%] max-w-[300px] rounded-lg transition-transform transform hover:scale-105 hover:shadow-xl hover:transition-all hover:duration-500 hover:ease-in-out bg-white"
         >
-          <div className="relative h-60 mb-4 flex justify-center items-center overflow-hidden py-2">
+          <div
+            onClick={() => handleProductClick(curProd.id)}
+            className="relative h-60 mb-4 flex justify-center items-center overflow-hidden py-2 cursor-pointer"
+          >
             <img
               src={curProd.image}
               alt={curProd.category}

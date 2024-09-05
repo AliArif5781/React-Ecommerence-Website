@@ -19,6 +19,10 @@ import ShirtCustomization from "../pages/ShirtCustomization";
 import StoreTwo from "../features/StoreTwo";
 import { Provider } from "react-redux";
 import CustomDesign from "../pages/CustomDesign";
+import MenProductDetailPage from "../pages/MenProductDetailPage";
+import WomenProductDetailPage from "../pages/WomenProductDetailPage";
+import JewelleryProductDetailPage from "../pages/JewelleryProductDetailPage";
+import TechProductDetailPage from "../pages/TechProductDetailPage";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +61,22 @@ const router = createBrowserRouter([
       {
         path: "wishlist",
         element: <ProtectedRoute Element={Whislist} />,
+      },
+      {
+        path: "MenProductDetailPage/:id",
+        element: <ProtectedRoute Element={MenProductDetailPage} />,
+      },
+      {
+        path: "WomenProductDetailPage/:id",
+        element: <ProtectedRoute Element={WomenProductDetailPage} />,
+      },
+      {
+        path: "JewelleryProductDetailPage/:id",
+        element: <ProtectedRoute Element={JewelleryProductDetailPage} />,
+      },
+      {
+        path: "TechProductDetailPage/:id",
+        element: <ProtectedRoute Element={TechProductDetailPage} />,
       },
     ],
   },

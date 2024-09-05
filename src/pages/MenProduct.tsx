@@ -1,18 +1,34 @@
 import React from "react";
 import Skeleton from "../components/Skeleton";
-import { Product, useGetSingleProductQuery } from "../features/ApiSlice";
+import {
+  Product,
+  useGetAllProductQuery,
+  useGetSingleProductQuery,
+} from "../features/ApiSlice";
 import Error from "./Error";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Heart } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../features/CartSlice";
 import { toast } from "react-toastify";
 
+export interface ProductDetail {
+  category: string;
+  description: string;
+  id: number;
+  image: string;
+  price: number;
+  title: string;
+}
+
 const MenProduct: React.FC = React.memo(() => {
   const { data, isLoading, isError } =
     useGetSingleProductQuery("men's clothing");
+  const { data: alldata } = useGetAllProductQuery();
+  console.log(alldata);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // If data is loading, show skeletons
   if (isLoading) {
@@ -39,9 +55,13 @@ const MenProduct: React.FC = React.memo(() => {
     toast.success(`${product.title}`, {
       position: "top-center",
       autoClose: 2000,
-      style: { backgroundColor: "black", color: "white" },
     });
   };
+
+  const handleProductClick = (id: number) => {
+    navigate(`/MenProductDetailPage/${id}`);
+  };
+
   // If data is successfully fetched, render the product list
   return (
     <div className="h-[100vh] pt-20 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 place-items-center text-gray-600 border-gray-200 border-opacity-60">
@@ -56,7 +76,10 @@ const MenProduct: React.FC = React.memo(() => {
           key={curProd.id}
           className="p-4 w-[90%] max-w-[300px] rounded-lg transition-transform transform hover:scale-105 hover:shadow-xl hover:transition-all hover:duration-500 hover:ease-in-out bg-white"
         >
-          <div className="relative h-60 mb-4 flex justify-center items-center overflow-hidden py-2">
+          <div
+            className="relative h-60 mb-4 flex justify-center items-center overflow-hidden py-2 cursor-pointer"
+            onClick={() => handleProductClick(curProd.id)}
+          >
             <img
               src={curProd.image}
               alt={curProd.category}
@@ -87,6 +110,7 @@ const MenProduct: React.FC = React.memo(() => {
             <div className="text-lg font-bold text-gray-900">
               ${curProd.price}
             </div>
+            <div></div>
           </div>
         </div>
       ))}
