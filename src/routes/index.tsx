@@ -23,7 +23,6 @@ import MenProductDetailPage from "../pages/MenProductDetailPage";
 import WomenProductDetailPage from "../pages/WomenProductDetailPage";
 import JewelleryProductDetailPage from "../pages/JewelleryProductDetailPage";
 import TechProductDetailPage from "../pages/TechProductDetailPage";
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -60,8 +59,9 @@ const router = createBrowserRouter([
       },
       {
         path: "wishlist",
-        element: <ProtectedRoute Element={Whislist} />,
+        element: <Whislist />,
       },
+
       {
         path: "MenProductDetailPage/:id",
         element: <ProtectedRoute Element={MenProductDetailPage} />,

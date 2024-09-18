@@ -113,7 +113,7 @@ const ShirtCustomization: React.FC = () => {
             }
             alt={`Selected ${shirtType} Shirt`}
             // className="object-contain lg:w-full h-full sm:object-cover"
-            className="object-cover w-fit h-full "
+            className="object-cover w-full h-full "
           />
           {board && (
             <motion.img

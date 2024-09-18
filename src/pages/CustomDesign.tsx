@@ -7,7 +7,7 @@ import {
   setCartFromLocalStorage,
   removeItem,
 } from "../features/AddItemCart";
-
+import "./CustomScrollerCart.css";
 // Define the types for the price options:
 // Types help TypeScript understand what kind of data to expect. Define a type for the options available:
 type Option = "polyester" | "cottonPolyester";
@@ -61,7 +61,7 @@ const CustomDesign: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen p-4 pt-[100px] flex flex-col items-center">
+    <div className="min-h-screen pt-[100px] flex flex-col items-center">
       {cartItems.length === 0 ? (
         <div className="flex items-center justify-center min-h-screen">
           <div className="text-center">
@@ -79,39 +79,41 @@ const CustomDesign: React.FC = () => {
           <h1 className="text-4xl text-center text-gray-800 pt-[50px] font-bold">
             Your Customized T-Shirt
           </h1>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 h-full w-full">
-            <div className="relative bg-gray-100 p-4 rounded-lg shadow-lg">
+          <div className="relative  max-w-full grid grid-cols-1 lg:grid-cols-2 gap-8 h-full">
+            <div className="overflow-x-auto custom-scrollbar sm:overflow-hidden">
               {cartItems.map((item: CartItem) => (
-                <div key={item.id} className="relative w-full h-[500px]">
-                  <img
-                    src={
-                      item.shirtType === "white"
-                        ? "/T-shirt/aa.png"
-                        : "/T-shirt/a (1).png"
-                    }
-                    className="object-cover w-full h-full rounded-lg"
-                    alt="Shirt"
-                  />
-                  <img
-                    src={item.url}
-                    alt={`Custom Logo ${item.id}`}
-                    style={{
-                      position: "absolute",
-                      top: `${item.top}%`,
-                      left: `${item.left}%`,
-                      width: "100px",
-                      height: "100px",
-                      transform: `translate(${item.x}px, ${item.y}px)`,
-                      objectFit: "cover",
-                    }}
-                    className="object-cover"
-                  />
-                  <button
-                    onClick={() => handleRemoveItem(item.id)}
-                    className="absolute top-2 right-2 bg-red-500 hover:scale-125 transition-transform text-white px-2 py-1 rounded"
-                  >
-                    Remove
-                  </button>
+                <div key={item.id} className="">
+                  <div className="relative w-full h-[500px]">
+                    <img
+                      src={
+                        item.shirtType === "white"
+                          ? "/T-shirt/aa.png"
+                          : "/T-shirt/a (1).png"
+                      }
+                      className="object-cover w-full h-full"
+                      alt="Shirt"
+                    />
+                    <img
+                      src={item.url}
+                      alt={`Custom Logo ${item.id}`}
+                      style={{
+                        position: "absolute",
+                        top: `${item.top}%`,
+                        left: `${item.left}%`,
+                        width: "100px",
+                        height: "100px",
+                        transform: `translate(${item.x}px, ${item.y}px)`,
+                        objectFit: "cover",
+                      }}
+                      className="cover"
+                    />
+                    <button
+                      onClick={() => handleRemoveItem(item.id)}
+                      className="absolute top-2 right-2 bg-red-500 hover:scale-125 transition-transform text-white px-2 py-1 rounded"
+                    >
+                      Remove
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>
@@ -137,7 +139,7 @@ const CustomDesign: React.FC = () => {
                   Total: ${totalPrice.toFixed(2)}
                 </div>
               </div>
-              <div className="flex justify-between items-center gap-5">
+              <div className="flex justify-between flex-wrap sm:flex-nowrap items-center gap-5">
                 <div
                   onClick={() => handleOptionClick("polyester")}
                   className={`bg-neutral-100 h-[45px] w-full flex justify-between px-5 items-center cursor-pointer border rounded-lg hover:border-black hover:shadow-xl transition-all duration-300 ease-in-out transform ${
@@ -163,7 +165,7 @@ const CustomDesign: React.FC = () => {
               </div>
               <button
                 onClick={BuyNow}
-                className="bg-slate-500 text-white px-6 py-3 rounded-lg hover:bg-slate-600 transition duration-300"
+                className="border  text-gray-800 font-semibold py-3 px-4 shadow-md  hover:text-gray-900  w-full   border-black  hover:shadow-custom-black transition-shadow duration-300 ease-in-out"
               >
                 Buy Now
               </button>

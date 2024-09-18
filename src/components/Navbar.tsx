@@ -20,6 +20,8 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { RootState } from "../features/Store";
 import { QuantityValue } from "../features/CartSlice";
+import { Product, useGetAllProductQuery } from "../features/ApiSlice";
+// import Search from "./Search";
 
 interface UserDetails {
   photo: string;
@@ -35,10 +37,11 @@ const Navbar = () => {
   const [user, setUser] = useState(auth.currentUser);
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [change, setChange] = useState<string>("");
 
   const navigate = useNavigate();
   const cartItems = useSelector((state: RootState) => state.cart);
-  const totalQuantity = QuantityValue(cartItems);
+  const totalQuantity = QuantityValue(cartItems.items);
   const scrollBar = useCallback(() => {
     window.scrollY > 60 ? setScrollIsActive(true) : setScrollIsActive(false);
   }, []);
@@ -127,6 +130,8 @@ const Navbar = () => {
                 type="text"
                 placeholder="Search..."
                 className="flex-grow py-2 px-4 border-0 focus:outline-none font-bold text-slate-600"
+                value={change}
+                onChange={(e) => setChange(e.target.value)}
               />
               <button className="bg-black text-white px-3 py-[8px] rounded focus:outline-none ml-2">
                 Search
@@ -265,9 +270,9 @@ const Navbar = () => {
                 </ul>
               </div>
               <div className="flex gap-3">
-                <div onClick={() => setIsSearchOpen(true)}>
+                {/* <div onClick={() => setIsSearchOpen(true)}>
                   <Search className="h-[19px] w-[19px] cursor-pointer" />
-                </div>
+                </div> */}
                 {/*  */}
                 <div className="relative group ">
                   <div className="hidden lg:flex">
@@ -367,7 +372,7 @@ const Navbar = () => {
       <div
         className={`text-white fixed top-0 left-0 h-full w-full bg-slate-900 transform ${
           isMenuOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 ease-in-out z-20 overflow-y-auto`}
+        } transition-transform duration-300 ease-in-out z-20 overflow-auto`}
       >
         <div className="flex justify-between items-center bg-slate-950 p-5">
           {/* Hidden logo */}
@@ -394,7 +399,7 @@ const Navbar = () => {
               <ChevronRight className="hidden" />
             </NavLink>
           </div>
-          <div className="relative w-full bg-slate-800 py-5">
+          <div className="w-full bg-slate-800 py-5">
             <button
               className={`text-lg font-bold flex items-center w-full justify-between px-5 ${
                 isFabricDropDown ? "pb-5" : ""

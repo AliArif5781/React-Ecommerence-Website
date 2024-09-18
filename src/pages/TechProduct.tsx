@@ -1,28 +1,49 @@
-import { useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Product, useGetElectronicProductQuery } from "../features/ApiSlice";
 import Skeleton from "../components/Skeleton";
 import Error from "./Error";
 import { Heart } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../features/CartSlice";
+import { addToCart, addToWishlist } from "../features/CartSlice";
 import { toast } from "react-toastify";
+import Search from "../components/Search";
 
 const TechProduct = () => {
+  const [query, setQuery] = useState<string>("");
+  const [sortOrder, setSortOrder] = useState<"default" | "asc" | "desc">(
+    "default"
+  );
+  const [products, setProducts] = useState<Product[]>([]);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { data, isLoading, isError } =
     useGetElectronicProductQuery("electronics");
 
+  const sortProducts = useCallback(
+    (products: Product[], order: "default" | "asc" | "desc") => {
+      if (order === "default") return products;
+      return [...products].sort((a, b) =>
+        order === "asc" ? a.price - b.price : b.price - a.price
+      );
+    },
+    []
+  );
+
+  useEffect(() => {
+    if (data) {
+      const filteredProducts = data.filter((product: Product) =>
+        product.title?.toLowerCase().includes(query.toLowerCase())
+      );
+      const sortedProducts = sortProducts(filteredProducts, sortOrder);
+      setProducts(sortedProducts);
+    }
+  }, [data, query, sortOrder, sortProducts]);
+
   if (isLoading) {
     return (
       <div className="h-[100%] pt-44 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center">
-        {/* <Skeleton />
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
-        <Skeleton /> */}
-        {/* || or */}
         {[...Array(4)].map((_, index) => (
           <Skeleton key={index} />
         ))}
@@ -30,15 +51,15 @@ const TechProduct = () => {
     );
   } else if (isError) {
     return (
-      <div className="h-[100%] pt-44 ">
+      <div className="h-[100%] pt-44">
         <Error />
       </div>
     );
   }
 
-  const handleToCart = (product: Product) => {
+  const handleAddToCart = (product: Product) => {
     dispatch(addToCart(product));
-    toast.success(`${product.title}`, {
+    toast.success(`${product.title} added to cart`, {
       position: "top-center",
       autoClose: 2000,
     });
@@ -47,30 +68,50 @@ const TechProduct = () => {
   const handleProductClick = (id: number) => {
     navigate(`/TechProductDetailPage/${id}`);
   };
+
+  const handleAddToWishlist = (product: Product) => {
+    dispatch(addToWishlist(product));
+    toast.info(`${product.title} added to wishlist`, {
+      position: "top-center",
+      autoClose: 1000,
+    });
+  };
+
   return (
-    <>
-      <div className="h-[100vh] pt-20 grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 place-items-center text-gray-600 border-gray-200 border-opacity-60">
-        {/*  */}
-        <div className="group mt-10 col-span-full">
-          <h1 className="text-5xl text-center mb-10 text-black transition-transform transform hover:scale-105 hover:transition-all hover:duration-500 hover:ease-in-out hover:font-bold relative">
-            TechProducts
-            <span className="block absolute left-0 bottom-0 w-full h-0.5 bg-black scale-x-0 origin-left transition-transform duration-500 ease-in-out group-hover:scale-x-100"></span>
-          </h1>
+    <div className="py-20 relative">
+      <div className="mb-10">
+        <h1 className="text-5xl text-center text-black pt-10">Tech Product</h1>
+        <div className="flex flex-col items-end mb-5 px-5 sm:pt-5">
+          <div className="mb-2 w-full max-w-xs pt-5 sm:pt-0">
+            <Search setQuery={setQuery} query={query} />
+          </div>
+          <select
+            value={sortOrder}
+            onChange={(e) =>
+              setSortOrder(e.target.value as "default" | "asc" | "desc")
+            }
+            className="border border-gray-300 rounded-md px-4 py-2"
+          >
+            <option value="default">Default</option>
+            <option value="asc">Price: Low to High</option>
+            <option value="desc">Price: High to Low</option>
+          </select>
         </div>
-        {/* text-3xl col-span-full text-center */}
-        {data?.map((curProd: Product) => (
-          // By adding the Product interface, you're telling TypeScript that the data array contains objects with specific properties (e.g., id, name, price, etc.). Then, when you use the map method, you can specify the type of the elem parameter as Product, which allows you to access its properties without errors.
+      </div>
+
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 place-items-center text-gray-600 border-gray-200 border-opacity-60 pt-11">
+        {products.map((product: Product) => (
           <div
-            key={curProd.id}
+            key={product.id}
             className="p-4 w-[90%] max-w-[300px] rounded-lg transition-transform transform hover:scale-105 hover:shadow-xl hover:transition-all hover:duration-500 hover:ease-in-out bg-white"
           >
             <div
-              onClick={() => handleProductClick(curProd.id)}
               className="relative h-60 mb-4 flex justify-center items-center overflow-hidden py-2 cursor-pointer"
+              onClick={() => handleProductClick(product.id)}
             >
               <img
-                src={curProd.image}
-                alt={curProd.category}
+                src={product.image}
+                alt={product.title}
                 className="object-contain h-full w-full"
               />
             </div>
@@ -78,32 +119,34 @@ const TechProduct = () => {
               CATEGORY
             </h2>
             <h1 className="title-font text-lg font-medium text-gray-900 mb-3">
-              {curProd.category.charAt(0).toUpperCase() +
-                curProd.category.slice(1).toLowerCase()}
+              {product.title}
             </h1>
             <p className="leading-relaxed mb-3 line-clamp-3">
-              {curProd.description}
+              {product.description}
             </p>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <button
-                  className="text-sm font-semibold text-center text-white bg-black p-2 rounded cursor-pointer"
-                  onClick={() => handleToCart(curProd)}
+                <div
+                  className="text-sm font-semibold text-center text-white bg-black p-2 rounded cursor-pointer px-3"
+                  onClick={() => handleAddToCart(product)}
                 >
                   Add to Cart
-                </button>
-                <Link to={"/wishlist"}>
+                </div>
+                <div
+                  onClick={() => handleAddToWishlist(product)}
+                  className="cursor-pointer"
+                >
                   <Heart />
-                </Link>
+                </div>
               </div>
               <div className="text-lg font-bold text-gray-900">
-                ${curProd.price}
+                ${product.price}
               </div>
             </div>
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

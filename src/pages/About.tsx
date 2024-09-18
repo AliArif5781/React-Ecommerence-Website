@@ -1,8 +1,8 @@
 import video1 from "/laptopPic/video.mp4";
 const About = () => {
   return (
-    <>
-      <div className=" pt-16 grid place-items-center text-gray-600 border-gray-200 border-opacity-60">
+    <div className="pb-32">
+      <div className=" pt-16 grid place-items-center text-gray-600 border-gray-200 border-opacity-60 ">
         <div className="group mt-10 col-span-full">
           <h1 className="text-5xl font-semibold text-center mb-10 text-black transition-transform transform hover:scale-105 hover:transition-all hover:duration-500 hover:ease-in-out hover:font-bold relative">
             About Us
@@ -33,7 +33,7 @@ const About = () => {
           <video src={video1} autoPlay loop muted></video>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

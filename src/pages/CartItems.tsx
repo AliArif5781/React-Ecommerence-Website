@@ -33,7 +33,7 @@ const CartItems = ({ item }: CartItemProps) => {
           >
             <img
               src={image}
-              className="h-[80px] sm:h-[130px] grid place-content-center"
+              className="h-[80px] sm:h-[130px] grid place-content-center object-contain"
               alt={title}
             />
           </th>
