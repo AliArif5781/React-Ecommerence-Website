@@ -1,5 +1,5 @@
 import { Heart } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Product, useGetJeweleryProductQuery } from "../features/ApiSlice";
 import Error from "./Error";
 import Skeleton from "../components/Skeleton";

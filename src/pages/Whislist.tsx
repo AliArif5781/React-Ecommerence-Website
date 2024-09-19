@@ -1,5 +1,4 @@
-import React from "react";
-import { Trash2, ShoppingCart } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeFromWishlist, addToCart } from "../features/CartSlice";
 import { RootState } from "../features/Store";

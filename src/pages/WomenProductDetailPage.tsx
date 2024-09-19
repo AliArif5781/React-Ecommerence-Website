@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { Product, useGetWomenProductQuery } from "../features/ApiSlice";
 import { useParams } from "react-router-dom";
-// import { ProductDetail } from "./MenProduct";
-import Skeleton from "../components/Skeleton";
 import Error from "./Error";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../features/CartSlice";

@@ -1,7 +1,7 @@
 import Skeleton from "../components/Skeleton";
 import { Product, useGetWomenProductQuery } from "../features/ApiSlice";
 import Error from "./Error";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Heart } from "lucide-react";
 import { useDispatch } from "react-redux";
 import { addToCart, addToWishlist } from "../features/CartSlice";

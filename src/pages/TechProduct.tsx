@@ -3,7 +3,7 @@ import { Product, useGetElectronicProductQuery } from "../features/ApiSlice";
 import Skeleton from "../components/Skeleton";
 import Error from "./Error";
 import { Heart } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart, addToWishlist } from "../features/CartSlice";
 import { toast } from "react-toastify";

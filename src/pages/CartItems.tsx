@@ -8,7 +8,7 @@ import {
 import { IoMdAdd, IoMdRemove } from "react-icons/io";
 
 const CartItems = ({ item }: CartItemProps) => {
-  const { category, description, id, image, price, title, quantity } = item;
+  const { id, image, price, title, quantity } = item;
 
   const dispatch = useDispatch();
 

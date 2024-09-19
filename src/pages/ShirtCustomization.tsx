@@ -78,8 +78,7 @@ const ShirtCustomization: React.FC = () => {
         ...board,
         shirtType: shirtType || "white",
       };
-      console.log("shirtTwo", cartItem);
-
+      // console.log("shirtTwo", cartItem);
       dispatch(addItemToCart(cartItem));
 
       setBoard(null);

@@ -6,7 +6,6 @@ import {
   UserRound,
   Heart,
   ShoppingCart,
-  Search,
   AlignJustify,
   X,
   ChevronRight,
@@ -20,8 +19,6 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { RootState } from "../features/Store";
 import { QuantityValue } from "../features/CartSlice";
-import { Product, useGetAllProductQuery } from "../features/ApiSlice";
-// import Search from "./Search";
 
 interface UserDetails {
   photo: string;
