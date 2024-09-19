@@ -1,5 +1,4 @@
-import { Facebook, Instagram, Twitter, Github } from "lucide-react";
-import { FaDiscord, FaLinkedin, FaGithub } from "react-icons/fa";
+import { FaLinkedin, FaGithub } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 export default function Footer() {

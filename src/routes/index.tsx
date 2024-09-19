@@ -23,6 +23,7 @@ import MenProductDetailPage from "../pages/MenProductDetailPage";
 import WomenProductDetailPage from "../pages/WomenProductDetailPage";
 import JewelleryProductDetailPage from "../pages/JewelleryProductDetailPage";
 import TechProductDetailPage from "../pages/TechProductDetailPage";
+import AccountPage from "../pages/YourAccount";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -124,6 +125,10 @@ const router = createBrowserRouter([
             <ProtectedRoute Element={CustomDesign} />,
           </Provider>
         ),
+      },
+      {
+        path: "profile",
+        element: <ProtectedRoute Element={AccountPage} />,
       },
     ],
   },
