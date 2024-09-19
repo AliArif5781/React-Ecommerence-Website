@@ -85,7 +85,7 @@ const Carousel = () => {
           <ArrowRight onClick={nextSlide} size={25} />
         </div>
         <div className="flex justify-center py-2">
-          {slides.map((slide, slideIndex) => (
+          {slides.map((_, slideIndex) => (
             <div
               key={slideIndex}
               onClick={() => goToSlide(slideIndex)}

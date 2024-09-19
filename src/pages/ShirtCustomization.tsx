@@ -94,6 +94,8 @@ const ShirtCustomization: React.FC = () => {
         y: info.offset.y,
         // shirtType: shirtType || "white",
       };
+      console.log(event);
+
       setBoard(newBoard);
       localStorage.setItem("board", JSON.stringify(newBoard));
     }

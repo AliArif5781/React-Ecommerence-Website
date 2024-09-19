@@ -42,6 +42,7 @@ const Navbar = () => {
   const scrollBar = useCallback(() => {
     window.scrollY > 60 ? setScrollIsActive(true) : setScrollIsActive(false);
   }, []);
+  console.log(loading);
 
   useEffect(() => {
     window.addEventListener("scroll", scrollBar);
