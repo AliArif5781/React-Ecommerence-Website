@@ -135,7 +135,7 @@ const ShirtCustomization: React.FC = () => {
           )}
         </div>
       </div>
-      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-items-center items-center col-span-full">
+      <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 justify-items-center items-center col-span-full pb-5">
         <button
           onClick={triggerFileInput}
           className="px-4 py-2 text-sm md:text-base lg:text-lg bg-black text-white rounded"
@@ -163,7 +163,7 @@ const ShirtCustomization: React.FC = () => {
         </button>
         <button
           onClick={handleAddToCart}
-          className={`px-4 py-2 text-sm md:text-base lg:text-lg rounded transition ${
+          className={`px-7 py-2 text-sm md:text-base lg:text-lg rounded transition ${
             board
               ? "bg-green-500 text-white hover:bg-green-600"
               : "bg-gray-400 text-gray-700 cursor-not-allowed"
