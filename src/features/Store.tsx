@@ -1,9 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { productApi, Product } from "./ApiSlice";
+// import { productApi, Product } from "./ApiSlice";
+import { productApi } from "./ApiSlice";
 import CartReducer from "./CartSlice";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import CartItems from "../features/CartSlice";
 
 export const store = configureStore({
@@ -15,6 +14,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(productApi.middleware),
 });
+
 console.log(CartItems);
 
 export type RootState = ReturnType<typeof store.getState>;
