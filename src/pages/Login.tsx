@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import img from "/logo_black.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "../firebase/Firebase";
 import { toast } from "react-toastify";
