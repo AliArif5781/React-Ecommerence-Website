@@ -2,7 +2,7 @@ import { FormEvent, useState } from "react";
 import img from "/logo_black.svg";
 import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { auth, googleProvider } from "../firebase/Firebase";
+import { auth } from "../firebase/Firebase";
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 import { Eye, EyeOff } from "lucide-react";
@@ -67,22 +67,22 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
-  const signInWithGoogle = async () => {
-    try {
-      await signInWithPopup(auth, googleProvider);
-      toast.success("Logged in with Google Successfully", {
-        position: "top-center",
-        autoClose: 2000,
-      });
-      navigate("/");
-    } catch (error) {
-      console.error(error);
-      toast.error("Google sign-in failed", {
-        position: "top-center",
-        autoClose: 2000,
-      });
-    }
-  };
+  // const signInWithGoogle = async () => {
+  //   try {
+  //     await signInWithPopup(auth, googleProvider);
+  //     toast.success("Logged in with Google Successfully", {
+  //       position: "top-center",
+  //       autoClose: 2000,
+  //     });
+  //     navigate("/");
+  //   } catch (error) {
+  //     console.error(error);
+  //     toast.error("Google sign-in failed", {
+  //       position: "top-center",
+  //       autoClose: 2000,
+  //     });
+  //   }
+  // };
 
   const register = () => {
     navigate("/account-section/register");
@@ -158,7 +158,7 @@ const Login = () => {
         </div>
 
         {/* Google Sign-in button */}
-        <button
+        {/* <button
           className="flex items-center justify-center h-[50px] w-full bg-white shadow-xl my-2"
           onClick={signInWithGoogle}
         >
@@ -168,7 +168,7 @@ const Login = () => {
               Sign in with Google
             </p>
           </div>
-        </button>
+        </button> */}
 
         {/* Register link */}
         <p className="register-link">
