@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import img from "/logo_black.svg";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import img1 from "/logo_white.svg";
