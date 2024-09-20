@@ -51,7 +51,7 @@ const MenProductDetailPage = () => {
 
   const { title, description, price, image } = product;
   return (
-    <div className="flex justify-center items-center h-[100vh] w-full max-w-6xl mx-auto px-4">
+    <div className="flex justify-center items-center h-[100vh] w-full max-w-6xl mx-auto px-4 ">
       <div className="flex flex-col lg:flex-row lg:items-center lg:space-x-10 w-full">
         <div className="lg:flex-1 flex justify-center lg:justify-end pt-[200px] lg:pt-0">
           <img
@@ -91,41 +91,3 @@ const MenProductDetailPage = () => {
 };
 
 export default MenProductDetailPage;
-/*
-<div className="flex justify-center items-center h-[100vh] w-full max-w-6xl mx-auto px-4">
-      <div className="flex flex-col lg:flex-row lg:items-center lg:space-x-10 w-full">
-        <div className="lg:flex-1 flex justify-center lg:justify-end">
-          <img
-            src={image}
-            alt={title}
-            className="object-contain w-full h-64 sm:h-80 md:h-96 lg:h-[400px] rounded-lg"
-          />
-        </div>
-        <div className="text-center lg:text-left lg:flex-1">
-          <h1 className="text-3xl sm:text-4xl font-semibold mb-4 text-gray-800 break-words">
-            {title}
-          </h1>
-          <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-6 break-words">
-            {description}
-          </p>
-          <div className="text-2xl font-bold text-gray-900 mb-4">
-            ${price.toFixed(2)}
-          </div>
-          <div className="flex flex-col gap-4 w-full max-w-md lg:max-w-lg mx-auto">
-            <button
-              onClick={() => handleAddToCart(product)}
-              className="border  text-gray-800 font-semibold py-3 px-4 shadow-md  hover:text-gray-900  w-full   border-black  hover:shadow-custom-black transition-shadow duration-300 ease-in-out"
-            >
-              Add To Cart
-            </button>
-            <button
-              onClick={() => BuyNow()}
-              className="bg-neutral-800 text-white font-semibold py-3 px-4 shadow-md hover:bg-black transition duration-300 w-full"
-            >
-              Buy Now
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
- */

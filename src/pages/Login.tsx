@@ -150,11 +150,11 @@ const Login = () => {
         </form>
 
         {/* Move Google button outside the form */}
-        <div className=" flex justify-center items-center">
+        {/* <div className=" flex justify-center items-center">
           <hr className="w-44 " />
           <span className="px-5 text-gray-500 font-bold">or</span>
           <hr className="w-44" />
-        </div>
+        </div> */}
 
         {/* Google Sign-in button */}
         {/* <button
