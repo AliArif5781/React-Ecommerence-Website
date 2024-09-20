@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth"; // This firebase/auth will help us to registe our use to firebase.
+import { getAuth, GoogleAuthProvider } from "firebase/auth"; // This firebase/auth will help us to registe our use to firebase.
 import { getFirestore } from "firebase/firestore";
 {
   /* So this is the code responsible for connecting firebase with our reactJs project .And  the firebaseConfig = this is the configuration  */
@@ -22,4 +22,5 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth();
 export const db = getFirestore(app);
+export const googleProvider = new GoogleAuthProvider();
 export default app;

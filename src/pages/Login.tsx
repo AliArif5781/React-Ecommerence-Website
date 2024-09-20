@@ -1,11 +1,12 @@
 import { FormEvent, useState } from "react";
 import img from "/logo_black.svg";
-import { Link, useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase/Firebase";
+import { useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "../firebase/Firebase";
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 import { Eye, EyeOff } from "lucide-react";
+import googleLOGos from "/googleLOGos.png";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -19,59 +20,74 @@ const Login = () => {
     setIsLoading(true);
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      // console.log("User logged in Successfully");
-      toast.success("logged in Successfully", {
+      toast.success("Logged in Successfully", {
         position: "top-center",
         autoClose: 2000,
       });
       navigate("/");
     } catch (error: any) {
-      // console.log(error);
-      if (error === "Firebase: Error (auth/wrong-password).") {
-        toast.error("Wrong Password", {
-          position: "top-center",
-          style: { backgroundColor: "black", color: "white" },
-          autoClose: 2000,
-        });
-      } else if (email.length === 0 && password.length === 0) {
-        toast.warning("Email and password is empty", {
-          position: "top-center",
-          style: { backgroundColor: "black", color: "white" },
-          autoClose: 2000,
-        });
-      } else if (email.length === 0 && password.length !== 0) {
-        toast.warning("Enter your email", {
-          position: "top-center",
-          style: { backgroundColor: "black", color: "white" },
-          autoClose: 2000,
-        });
-      } else if (email.length !== 0 && password.length === 0) {
-        toast.warning("Enter your password", {
-          position: "top-center",
-          style: { backgroundColor: "black", color: "white" },
-          autoClose: 2000,
-        });
-      } else if (!navigator.onLine) {
-        // Handle the case when the user is offline
-        toast.warn("No internet connection. Please check your network.", {
-          position: "top-center",
-          style: { backgroundColor: "black", color: "white" },
-          autoClose: 2000,
-        });
-      } else {
-        toast.error("Wrong Email", {
-          position: "top-center",
-          style: { backgroundColor: "black", color: "white" },
-          autoClose: 2000,
-        });
-      }
+      handleAuthError(error);
     } finally {
       setIsLoading(false);
     }
   };
+
+  const handleAuthError = (error: any) => {
+    if (error.code === "auth/wrong-password") {
+      toast.error("Wrong Password", {
+        position: "top-center",
+        autoClose: 2000,
+      });
+    } else if (!email && !password) {
+      toast.warning("Email and password are empty", {
+        position: "top-center",
+        autoClose: 2000,
+      });
+    } else if (!email) {
+      toast.warning("Enter your email", {
+        position: "top-center",
+        autoClose: 2000,
+      });
+    } else if (!password) {
+      toast.warning("Enter your password", {
+        position: "top-center",
+        autoClose: 2000,
+      });
+    } else if (!navigator.onLine) {
+      toast.warn("No internet connection. Please check your network.", {
+        position: "top-center",
+        autoClose: 2000,
+      });
+    } else {
+      toast.error("Wrong Email", { position: "top-center", autoClose: 2000 });
+    }
+  };
+
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
+
+  const signInWithGoogle = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider);
+      toast.success("Logged in with Google Successfully", {
+        position: "top-center",
+        autoClose: 2000,
+      });
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      toast.error("Google sign-in failed", {
+        position: "top-center",
+        autoClose: 2000,
+      });
+    }
+  };
+
+  const register = () => {
+    navigate("/account-section/register");
+  };
+
   return (
     <div className="login-container">
       <div className="form-container">
@@ -92,8 +108,6 @@ const Login = () => {
               autoComplete="email"
             />
           </div>
-
-          {/*  */}
           <div className="form-group flex flex-col">
             <label htmlFor="password" className="mb-2">
               Password
@@ -122,20 +136,40 @@ const Login = () => {
             </div>
           </div>
 
-          {/*  */}
           <button
             type="submit"
-            className={`button ${
+            className={`w-full bg-black text-white py-2 rounded-md hover:bg-gray-900 transition duration-200 ${
               loading ? "opacity-50 cursor-not-allowed" : ""
             }`}
-            disabled={loading} // Disable the button when loading
+            disabled={loading}
           >
-            {loading ? <Loader /> : "Register"}
+            {loading ? <Loader /> : "Login"}
+          </button>
+
+          <div className="py-5 flex justify-center items-center">
+            <hr className="w-44 " />
+            <span className="px-5 text-gray-500 font-bold">or </span>
+            <hr className="w-44" />
+          </div>
+
+          <button
+            className="flex items-center justify-center h-[50px] w-full bg-white shadow-lg hover:shadow-lg transition-shadow duration-300"
+            onClick={signInWithGoogle}
+          >
+            <img src={googleLOGos} alt="Google Logo" className="h-9" />
+            <div className="flex items-center">
+              <p className="text-neutral-700 font-semibold">
+                Sign in with Google
+              </p>
+            </div>
           </button>
         </form>
+
         <p className="register-link">
           Don’t have an account?{" "}
-          <Link to="/account-section/register">Register Here</Link>
+          <button onClick={register} className="text-black hover:underline">
+            Register Here
+          </button>
         </p>
       </div>
     </div>
