@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import img from "/logo_black.svg";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import img1 from "/logo_white.svg";
@@ -19,6 +19,7 @@ import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { RootState } from "../features/Store";
 import { QuantityValue } from "../features/CartSlice";
+import CustomTShirtPurchaseMessage from "./CustomTshirtBox";
 
 interface UserDetails {
   photo: string;
@@ -103,6 +104,7 @@ const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
     return navigate("/wishlist");
   };
+
   return (
     <>
       <header
@@ -579,6 +581,7 @@ const Navbar = () => {
           {/*  */}
         </div>
       </div>
+      <CustomTShirtPurchaseMessage />
     </>
   );
 };
