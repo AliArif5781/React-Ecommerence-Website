@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import img from "/logo_black.svg";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "../firebase/Firebase";
 import { toast } from "react-toastify";
@@ -95,6 +95,8 @@ const Login = () => {
           <img src={img} alt="Logo" />
         </div>
         <h2>Log in to your account</h2>
+
+        {/* Form for email/password login */}
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="email">Email Address</label>
@@ -136,6 +138,7 @@ const Login = () => {
             </div>
           </div>
 
+          {/* Login button */}
           <button
             type="submit"
             className={`w-full bg-black text-white py-2 rounded-md hover:bg-gray-900 transition duration-200 ${
@@ -145,29 +148,35 @@ const Login = () => {
           >
             {loading ? <Loader /> : "Login"}
           </button>
-
-          <div className="py-5 flex justify-center items-center">
-            <hr className="w-44 " />
-            <span className="px-5 text-gray-500 font-bold">or </span>
-            <hr className="w-44" />
-          </div>
-
-          <button
-            className="flex items-center justify-center h-[50px] w-full bg-white shadow-lg hover:shadow-lg transition-shadow duration-300"
-            onClick={signInWithGoogle}
-          >
-            <img src={googleLOGos} alt="Google Logo" className="h-9" />
-            <div className="flex items-center">
-              <p className="text-neutral-700 font-semibold">
-                Sign in with Google
-              </p>
-            </div>
-          </button>
         </form>
 
+        {/* Move Google button outside the form */}
+        <div className=" flex justify-center items-center">
+          <hr className="w-44 " />
+          <span className="px-5 text-gray-500 font-bold">or</span>
+          <hr className="w-44" />
+        </div>
+
+        {/* Google Sign-in button */}
+        <button
+          className="flex items-center justify-center h-[50px] w-full bg-white shadow-xl my-2"
+          onClick={signInWithGoogle}
+        >
+          <img src={googleLOGos} alt="Google Logo" className="h-9" />
+          <div className="flex items-center">
+            <p className="text-neutral-700 font-semibold">
+              Sign in with Google
+            </p>
+          </div>
+        </button>
+
+        {/* Register link */}
         <p className="register-link">
           Don’t have an account?{" "}
-          <button onClick={register} className="text-black hover:underline">
+          <button
+            onClick={register}
+            className="text-custom-black hover:underline"
+          >
             Register Here
           </button>
         </p>
