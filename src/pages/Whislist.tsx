@@ -4,6 +4,7 @@ import { removeFromWishlist, addToCart } from "../features/CartSlice";
 import { RootState } from "../features/Store";
 import { Product } from "../features/ApiSlice";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Wishlist() {
   const dispatch = useDispatch();
@@ -15,6 +16,10 @@ export default function Wishlist() {
 
   const handleAddToCart = (product: Product) => {
     dispatch(addToCart(product));
+    toast.success(product.title, {
+      position: "top-center",
+      autoClose: 1000,
+    });
   };
 
   return (
