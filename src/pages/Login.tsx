@@ -1,12 +1,11 @@
 import { FormEvent, useState } from "react";
 import img from "/logo_black.svg";
 import { useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase/Firebase";
 import { toast } from "react-toastify";
 import Loader from "../components/Loader";
 import { Eye, EyeOff } from "lucide-react";
-import googleLOGos from "/googleLOGos.png";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
