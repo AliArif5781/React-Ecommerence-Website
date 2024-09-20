@@ -1,9 +1,8 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { X } from "lucide-react";
 
 export default function CustomTShirtPurchaseMessage() {
   const [isVisible, setIsVisible] = useState<boolean>(true);
-  const targetRef = useRef<HTMLDivElement>(null);
 
   if (!isVisible) {
     return null;
