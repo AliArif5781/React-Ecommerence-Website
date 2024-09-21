@@ -431,16 +431,6 @@ const Navbar = () => {
                     </li>
                   </ul>
                 </div>
-                <div className="px-4 py-2">
-                  <h3 className="font-bold text-gray-400">
-                    Children's Clothing
-                  </h3>
-                  <ul>
-                    <li onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                      <Link to="/childrenProduct">Children's Clothes</Link>
-                    </li>
-                  </ul>
-                </div>
                 {/*  */}
                 <div className="px-4 py-2">
                   <h3 className="font-bold text-gray-400">Laptop</h3>
