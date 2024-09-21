@@ -433,10 +433,10 @@ const Navbar = () => {
                 </div>
                 {/*  */}
                 <div className="px-4 py-2">
-                  <h3 className="font-bold text-gray-400">Laptop</h3>
+                  <h3 className="font-bold text-gray-400">Jewellery</h3>
                   <ul>
                     <li onClick={() => setIsMenuOpen(!isMenuOpen)}>
-                      <Link to="/laptop">Laptop</Link>
+                      <Link to="/jewelleryProduct">Jewellery</Link>
                     </li>
                   </ul>
                 </div>
