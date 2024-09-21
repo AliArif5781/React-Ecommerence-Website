@@ -542,8 +542,8 @@ const Navbar = () => {
               </div>
             </>
           ) : (
-            <div className="py-64">
-              <div className="fixed bottom-0 left-0 w-full bg-slate-800 text-white ">
+            <div>
+              <div className="bottom-0 left-0 w-full bg-slate-800 text-white ">
                 <div className="text-center text-sm px-5">
                   Not a Member Yet? Join Elegasilk for great discounts and
                   exclusive member benefits & offers.
