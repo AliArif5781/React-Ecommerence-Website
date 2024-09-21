@@ -59,7 +59,7 @@ const TechProductDetailPage = () => {
   const { title, description, price, image } = product;
 
   return (
-    <div className="flex justify-center items-center h-[100vh] w-full max-w-6xl mx-auto px-4">
+    <div className="flex justify-center items-center h-[100vh] w-full max-w-6xl mx-auto px-4 mb-[250px] lg:mb-0">
       <div className="flex flex-col lg:flex-row lg:items-center lg:space-x-10 w-full">
         <div className="lg:flex-1 flex justify-center lg:justify-end pt-[300px] md:pt-0">
           <img

@@ -103,7 +103,7 @@ const ShirtCustomization: React.FC = () => {
 
   return (
     <div className="flex flex-col justify-center items-center h-auto w-full overflow-x-scroll sm:overflow-x-hidden">
-      <h1 className="text-3xl sm:text-5xl font-semibold mb-4 pt-[100px] text-center">
+      <h1 className="text-3xl sm:text-5xl  mb-4 pt-[100px] text-center font-bold px-2">
         Customize Your {shirtType === "white" ? "White" : "Black"} Shirt
       </h1>
       <div className="relative w-full max-w-lg">
@@ -129,6 +129,7 @@ const ShirtCustomization: React.FC = () => {
                 height: "100px",
                 transform: `translate(${board.x}px, ${board.y}px)`,
               }}
+              className=" object-cover"
               drag
               dragConstraints={shirtContainerRef}
               whileDrag={{ cursor: "pointer" }}

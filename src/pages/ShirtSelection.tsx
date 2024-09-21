@@ -34,8 +34,8 @@ const ShirtSelection: React.FC = () => {
       </div>
       <span>Important:</span>
       <span className="">
-        Customize your custom t-shirt in laptop or in personal computer for
-        better user experience.
+        Customize your custom t-shirt in bigger screen for better user
+        experience.
       </span>
     </div>
   );
