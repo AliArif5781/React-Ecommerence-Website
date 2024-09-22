@@ -9,9 +9,9 @@ ElegaSilk is a luxury  e-commerce platform that brings traditional weaves to mod
 - **Product Management**: Users can easily add, update, and delete products in their inventory.
 
 - **Custom T-Shirt Designer**: Unique functionality allow users to create personalized t-shirts by uploading their own logos and designs.
-- 
+
 - **Image Upload via Mobile Camera**: Users can upload images directly from their mobile camera, enhancing convenience for mobile device users.
-- 
+  
 - **Drag and Drop Interface**: Intuitive drag-and-drop functionality for effortless customization of designs.
 
 - **Enhanced User Interface**: Focus on an appealing and user-friendly UI for an enjoyable shopping experience.
