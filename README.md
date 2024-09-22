@@ -1,5 +1,5 @@
 ## About ElegaSilk
-____________________________________________________________________________________________
+
 ElegaSilk is a luxury  e-commerce platform that brings traditional weaves to modern fashion. Built with typescript and react, and authentication with Firebase and  designed to offer a seamless shopping experience focusing on performance and security.
 
 ## Features
